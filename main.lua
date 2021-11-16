@@ -53,11 +53,3 @@ CreateThread(function()
         Wait(wait)
     end
 end)
-
---[[ RegisterCommand("trattach", function()
-local veh_l = GetVehiclePedIsIn(PlayerPedId(), false)
-if veh_l ~= 0 then
-    local nearest = GetNearestTrailer(veh_l)
-    AttachVehicleToTrailer(veh_l, nearest, 2.5)
-end
-end) ]]
