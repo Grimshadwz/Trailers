@@ -1,3 +1,6 @@
+local cfg = {}
+cfg.autoAttach = true
+
 function GetNearestTrailer(veh_l)
     local coords = GetEntityCoords(veh_l)
     local femaleCoords = GetEntityBonePosition_2(veh_l, GetEntityBoneIndexByName(veh_l, 'attach_female'))
@@ -32,11 +35,15 @@ CreateThread(function()
             if GetEntityBoneIndexByName(veh_l, 'attach_female') ~= -1 then
                 local nearest = GetNearestTrailer(veh_l)
                 if nearest ~= nil and nearest ~= 0 then
-                    wait = 0
-                    BeginTextCommandDisplayHelp("NSQRD_TRLAT_HELP")
-                    DisplayHelpTextFromStringLabel(0, 0, 0, 0)
-                    if IsControlJustPressed(0, 47) then
+                    if cfg.autoAttach then
                         AttachVehicleToTrailer(veh_l, nearest, 1.2)
+                    else
+                        wait = 0
+                        BeginTextCommandDisplayHelp("NSQRD_TRLAT_HELP")
+                        DisplayHelpTextFromStringLabel(0, 0, 0, 0)
+                        if IsControlJustPressed(0, 47) then
+                            AttachVehicleToTrailer(veh_l, nearest, 1.2)
+                        end
                     end
                 else
                     wait = 2500
@@ -48,9 +55,9 @@ CreateThread(function()
 end)
 
 --[[ RegisterCommand("trattach", function()
-    local veh_l = GetVehiclePedIsIn(PlayerPedId(), false)
-    if veh_l ~= 0 then
-        local nearest = GetNearestTrailer(veh_l)
-        AttachVehicleToTrailer(veh_l, nearest, 2.5)
-    end
+local veh_l = GetVehiclePedIsIn(PlayerPedId(), false)
+if veh_l ~= 0 then
+    local nearest = GetNearestTrailer(veh_l)
+    AttachVehicleToTrailer(veh_l, nearest, 2.5)
+end
 end) ]]
