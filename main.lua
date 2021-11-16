@@ -1,5 +1,5 @@
 local cfg = {}
-cfg.autoAttach = true
+cfg.autoAttach = false
 
 function GetNearestTrailer(veh_l)
     local coords = GetEntityCoords(veh_l)
@@ -26,9 +26,9 @@ function GetNearestTrailer(veh_l)
     end
 end
 
-local wait = 2500
+local wait = 3000
 CreateThread(function()
-    AddTextEntry("NSQRD_TRLAT_HELP", "Press ~INPUT_DETONATE~ to attach nearby trailer.")
+    AddTextEntry("NSQRD_TRLAT_HELP", "Press ~INPUT_DETONATE~ to attach trailer.")
     while true do
         local veh_l = GetVehiclePedIsIn(PlayerPedId(), false)
         if veh_l ~= 0 then
@@ -46,7 +46,7 @@ CreateThread(function()
                         end
                     end
                 else
-                    wait = 2500
+                    wait = 3000
                 end
             end
         end
